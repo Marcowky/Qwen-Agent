@@ -69,6 +69,7 @@ class TextChatAtOAI(BaseFnCallModel):
         delta_stream: bool,
         generate_cfg: dict,
     ) -> Iterator[List[Message]]:
+        generate_cfg['stop'] = []
         messages = self.convert_messages_to_dicts(messages)
         try:
             response = self._chat_complete_create(model=self.model, messages=messages, stream=True, **generate_cfg)
@@ -90,6 +91,7 @@ class TextChatAtOAI(BaseFnCallModel):
         messages: List[Message],
         generate_cfg: dict,
     ) -> List[Message]:
+        generate_cfg['stop'] = []
         messages = self.convert_messages_to_dicts(messages)
         try:
             response = self._chat_complete_create(model=self.model, messages=messages, stream=False, **generate_cfg)
